@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex align-items-center flex-column justify-content-center gap-3">
+    
+    <a href="{{ url_for('products') }}" class="btn btn-light btn-lg btn-main">Новые телефоны</a>
+    <a href="{{ url_for('products') }}" class="btn btn-light btn-lg btn-main">БУ телефоны</a>
+    <a href="{{ url_for('sell_phone') }}" class="btn btn-light btn-lg btn-main">Выкуп техники</a>
+</div>
+
+<div class="products-main">
+    {% for id, product in products_list.items() %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <img src="{{ url_for('static', filename='i.png') }}" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.price }} ₽</p>
+                <div class="card-body text-end">
+                    <a href="{{ url_for('product', product_id=id) }}" class="btn btn-primary">Подробнее</a>
+                    <a href="{{ url_for('add_to_cart', product_id=id) }}" class="btn btn-success">В корзину</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

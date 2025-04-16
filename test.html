@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Маска телефона</title>
+  <style>
+    body {
+      padding: 2rem;
+      font-family: sans-serif;
+    }
+    .error {
+      color: red;
+    }
+    .valid {
+      color: green;
+    }
+    input {
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      width: 250px;
+    }
+  </style>
+</head>
+<body>
+
+  <label for="phone">Введите номер телефона:</label><br>
+  <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" maxlength="18"><br><br>
+  <p id="message"></p>
+
+  <script>
+    const phoneInput = document.getElementById('phone');
+    const message = document.getElementById('message');
+
+    phoneInput.addEventListener('input', onPhoneInput);
+
+    function onPhoneInput(e) {
+      const input = e.target;
+      let value = input.value.replace(/\D/g, ''); // удаляем всё кроме цифр
+
+      // Удаляем лишние цифры
+      if (value.startsWith('8')) value = '7' + value.slice(1);
+      if (!value.startsWith('7')) value = '7' + value;
+
+      if (value.length > 11) value = value.slice(0, 11);
+
+      let formatted = '+7';
+      if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+      if (value.length >= 4) formatted += ') ' + value.slice(4, 7);
+      if (value.length >= 7) formatted += '-' + value.slice(7, 9);
+      if (value.length >= 9) formatted += '-' + value.slice(9, 11);
+
+      input.value = formatted;
+
+      if (value.length === 11) {
+        message.textContent = 'Номер корректный ✅';
+        message.className = 'valid';
+      } else {
+        message.textContent = 'Введите все цифры номера (10 после +7)';
+        message.className = 'error';
+      }
+    }
+  </script>
+
+</body>
+</html>
