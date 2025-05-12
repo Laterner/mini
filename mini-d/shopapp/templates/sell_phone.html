@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Продать телефон</h2>
+
+{% if messages %}
+  <div class="alert alert-success">
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+  </div>
+{% endif %}
+
+<form method="POST" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="model" class="form-label">Модель телефона</label>
+        <input type="text" class="form-control" id="model" name="model" required>
+    </div>
+    <div class="mb-3">
+        <label for="ram" class="form-label">ОЗУ (RAM)</label>
+        <select class="form-select" id="ram" name="ram" required>
+            <option value="">Выберите</option>
+            <option>2 ГБ</option>
+            <option>4 ГБ</option>
+            <option>6 ГБ</option>
+            <option>8 ГБ</option>
+            <option>12 ГБ</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="rom" class="form-label">ПЗУ (ROM)</label>
+        <select class="form-select" id="rom" name="rom" required>
+            <option value="">Выберите</option>
+            <option>32 ГБ</option>
+            <option>64 ГБ</option>
+            <option>128 ГБ</option>
+            <option>256 ГБ</option>
+            <option>512 ГБ</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="condition" class="form-label">Состояние (1 - плохо, 10 - идеально)</label>
+        <input type="range" class="form-range" id="condition" name="condition" min="1" max="10">
+    </div>
+    <div class="mb-3">
+        <label for="comment" class="form-label">Комментарий</label>
+        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="number" class="form-label">Ваш номер для связи</label>
+        <input type="text" placeholder="+7(XXX) XXX XX XX" class="form-control" id="number" name="number" required>
+        <p id="message"></p>
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+<script>
+    const phoneInput = document.getElementById('number');
+    const message = document.getElementById('message');
+
+    phoneInput.addEventListener('input', onPhoneInput);
+
+    function onPhoneInput(e) {
+      const input = e.target;
+      let value = input.value.replace(/\D/g, ''); // удаляем всё кроме цифр
+
+      // Удаляем лишние цифры
+      if (value.startsWith('8')) value = '7' + value.slice(1);
+      if (!value.startsWith('7')) value = '7' + value;
+
+      if (value.length > 11) value = value.slice(0, 11);
+
+      let formatted = '+7';
+      if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+      if (value.length >= 4) formatted += ') ' + value.slice(4, 7);
+      if (value.length >= 7) formatted += '-' + value.slice(7, 9);
+      if (value.length >= 9) formatted += '-' + value.slice(9, 11);
+
+      input.value = formatted;
+
+      if (value.length === 11) {
+        message.textContent = 'Номер корректный ✅';
+        message.className = 'valid';
+      } else {
+        message.textContent = 'Введите все цифры номера (10 после +7)';
+        message.className = 'error';
+      }
+    }
+  </script>
+{% endblock %}

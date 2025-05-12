@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <img src="static/i.png" class="card-img-top" />
+    <div class="card-body">
+        <h3 class="card-title">{{ product.name }}</h3>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text"><strong>{{ product.price }} ₽</strong></p>
+        <a href="" class="btn btn-success">Добавить в корзину</a>
+        <a href="{% url 'products' %}" class="btn btn-secondary">Назад</a>
+    </div>
+</div>
+{% endblock %}

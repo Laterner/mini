@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    .main-banner {
+      position: relative;
+      color: white;
+    }
+
+    .main-banner img {
+      width: 100%;
+      display: block;
+    }
+
+    .main-banner .title {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    }
+
+    .main-banner .button {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      text-align: center;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .section {
+      background-color: white;
+      padding: 16px;
+      margin-top: 10px;
+    }
+
+    .section h2 {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+    }
+
+    .items {
+      display: flex;
+      gap: 10px;
+    }
+
+    .item {
+      flex: 1;
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .item img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 8px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #ccc;
+      padding: 8px 0;
+    }
+
+    .bottom-nav div {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-banner">
+    <img src="static/i.png" alt="Часы">
+    <div class="title">Новые устройства</div>
+    <div class="button">Подробнее</div>
+  </div>
+
+  <div class="section">
+    <!-- <h2>Купить оригинальные товары</h2> -->
+    <div class="items">
+      <div class="item">
+        <img src="static/i.png" alt="Швейцарские часы">
+        <div>Б/У Смартфоны</div>
+      </div>
+      <div class="item">
+        <img src="static/i.png" alt="Ювелирные изделия">
+        <div>Выкуп ваших устройств</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div>📦</div>
+    <div>👤</div>
+  </div>
+</body>
+</html>
